@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import 'react-calendar/dist/Calendar.css';
+import Calendar from 'react-calendar';
 
-function App() {
+const days = [20, 25 ,30]
+
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{
+      flex: 1,
+      width: '100%',
+      justifyContent: 'center',
+      alignItems: 'center'
+    }}>
+      <div style={{
+        width: '70%',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}>
+        <Calendar
+          defaultActiveStartDate={new Date()}
+          tileClassName={({ activeStartDate, date, view }) => {
+            return days.find(x => x === date.getDate()) ? 'react-calendar__tile--active' : null
+          }}
+          tileDisabled={({ activeStartDate, date, view }) => {
+            return !days.find(x => x === date.getDate())
+          }}
+        />
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
